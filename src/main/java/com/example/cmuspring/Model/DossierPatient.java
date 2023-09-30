@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
@@ -28,6 +29,10 @@ public class DossierPatient implements Serializable {
   @CreatedDate
   @Column(name = "date_creation")
   private Instant dateCreation;
+
+  @LastModifiedDate
+  @Column(name = "date_modification")
+  private Instant dateModification;
 
   private String ville;
 
