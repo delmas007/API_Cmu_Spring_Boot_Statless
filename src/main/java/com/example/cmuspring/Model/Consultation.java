@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -16,6 +18,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Entity
 @Table(name = "consultation")
+@EntityListeners(AuditingEntityListener.class)
 public class Consultation implements Serializable {
 
   @Id
@@ -23,6 +26,7 @@ public class Consultation implements Serializable {
   private Integer id;
 
   @Column(name = "date_creation")
+  @CreatedDate
   private Instant dateCreation;
 
   @Column(name = "examen_physique")
@@ -36,7 +40,7 @@ public class Consultation implements Serializable {
   private String ordonnance;
 
   @Column(name = "taux_reduction")
-  private long tauxReduction;
+  private int tauxReduction;
 
   private String code;
 
