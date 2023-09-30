@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface ConsultationRepository extends JpaRepository<Consultation,Integer> {
 
-    Optional<Consultation> findConsultationByNumeroCmu(String numeroCmu);
+    Optional<Consultation> findConsultationByIdUtilisateur(String numeroCmu);
 
 
 }
