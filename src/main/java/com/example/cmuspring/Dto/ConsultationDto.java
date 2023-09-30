@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 public class ConsultationDto {
 
+    private Integer id;
+
     private String examenPhysique;
 
     private String discussionDesSymptomes;
@@ -30,6 +32,7 @@ public class ConsultationDto {
             return  null;
         }
         return ConsultationDto.builder()
+                .id(consultation.getId())
                 .examenPhysique(consultation.getExamenPhysique())
                 .discussionDesSymptomes(consultation.getDiscussionDesSymptomes())
                 .diagnostic(consultation.getDiagnostic())
@@ -46,6 +49,7 @@ public class ConsultationDto {
             return  null;
         }
         return Consultation.builder()
+                .id(consultationDto.getId())
                 .examenPhysique(consultationDto.getExamenPhysique())
                 .discussionDesSymptomes(consultationDto.getDiscussionDesSymptomes())
                 .diagnostic(consultationDto.getDiagnostic())
