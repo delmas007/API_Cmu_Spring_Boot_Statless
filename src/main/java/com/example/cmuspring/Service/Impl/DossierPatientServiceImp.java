@@ -5,21 +5,18 @@ import com.example.cmuspring.Model.DossierPatient;
 import com.example.cmuspring.Repository.DossierConsultationRepository;
 import com.example.cmuspring.Service.DossierPatientService;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @Transactional
-public class DossierConsultationServiceImp implements DossierPatientService {
+public class DossierPatientServiceImp implements DossierPatientService {
 
     DossierConsultationRepository dossierConsultationRepository;
 
     @Autowired
-    public DossierConsultationServiceImp(DossierConsultationRepository dossierConsultationRepository) {
+    public DossierPatientServiceImp(DossierConsultationRepository dossierConsultationRepository) {
         this.dossierConsultationRepository = dossierConsultationRepository;
     }
 
