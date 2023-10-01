@@ -9,9 +9,9 @@ public interface DossierPatientService {
 
     DossierPatientDto ajouerDossierPatient(DossierPatientDto dto);
 
-    DossierPatientDto consulterDossierPatient(DossierPatientDto dto);
+    DossierPatientDto consulterDossierPatient(String numeroCmu);
 
-    DossierPatientDto modifierDossierPatient(String numeroCmu);
+    DossierPatientDto modifierDossierPatient(String numeroCmu,String antecedentsMedicaux,String historiqueVaccination,String resumesMedicaux);
 
     void supprimerDossierPatient(String numeroCmu);
 
