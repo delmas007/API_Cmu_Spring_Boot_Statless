@@ -44,8 +44,10 @@ public class Consultation implements Serializable {
 
   private String code;
 
-  @Column(name = "numero_CMU")
-  private String numeroCmu;
+  @ManyToOne
+  @JoinColumn(name = "numero_CMU")
+  private DossierPatient numeroCmu;
+
 
   @Column(name = "id_utilisateur")
   private String idUtilisateur;

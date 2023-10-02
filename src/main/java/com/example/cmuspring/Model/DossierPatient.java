@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @Builder
@@ -25,6 +26,7 @@ public class DossierPatient implements Serializable {
   @Id
   @Column(name = "numero_CMU")
   private String numeroCmu;
+
 
   @CreatedDate
   @Column(name = "date_creation")
@@ -53,8 +55,12 @@ public class DossierPatient implements Serializable {
 
   private Boolean enceinte;
 
-  @Column(name = "id_utilisateur")
-  private String idUtilisateur;
+  @OneToOne
+  @JoinColumn(name = "id_utilisateur")
+  private Utilisateur idUtilisateur;
+
+  @OneToMany(mappedBy = "numeroCmu")
+  private List<Consultation> consultation;
 
 
 

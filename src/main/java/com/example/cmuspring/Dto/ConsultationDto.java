@@ -2,6 +2,7 @@ package com.example.cmuspring.Dto;
 
 
 import com.example.cmuspring.Model.Consultation;
+import com.example.cmuspring.Model.DossierPatient;
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,7 +24,7 @@ public class ConsultationDto {
 
     private String code;
 
-    private String numeroCmu;
+    private DossierPatient numeroCmu;
 
     private String idUtilisateur;
 

@@ -5,10 +5,10 @@ import com.example.cmuspring.Model.Consultation;
 import com.example.cmuspring.Repository.ConsultationRepository;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface ConsultationService {
 
-    ConsultationDto save(ConsultationDto dto);
+    ConsultationDto save(String numeroCmu,String examenPhysique,String DiscussionSymptomes
+            ,String diagnostic,String ordonnance);
 
     ConsultationDto voirConsultation(String numero_CMU);
 }

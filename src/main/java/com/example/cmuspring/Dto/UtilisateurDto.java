@@ -1,5 +1,6 @@
 package com.example.cmuspring.Dto;
 
+import com.example.cmuspring.Model.Role;
 import com.example.cmuspring.Model.Utilisateur;
 import jakarta.persistence.Column;
 import lombok.Builder;
@@ -17,7 +18,7 @@ public class UtilisateurDto {
 
     private String prenom;
 
-    private String role;
+    private Role role;
     
     private String numeroCmu;
     

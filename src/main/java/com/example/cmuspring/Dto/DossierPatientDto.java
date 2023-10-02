@@ -1,6 +1,7 @@
 package com.example.cmuspring.Dto;
 
 import com.example.cmuspring.Model.DossierPatient;
+import com.example.cmuspring.Model.Utilisateur;
 import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class DossierPatientDto {
 
     private Boolean enceinte;
 
-    private String idUtilisateur;
+    private Utilisateur idUtilisateur;
 
     public static DossierPatientDto fromEntity(DossierPatient dossierPatient){
         if (dossierPatient == null){
