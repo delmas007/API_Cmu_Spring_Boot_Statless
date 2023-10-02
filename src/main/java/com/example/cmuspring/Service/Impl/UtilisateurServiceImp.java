@@ -1,5 +1,6 @@
 package com.example.cmuspring.Service.Impl;
 
+import com.example.cmuspring.Dto.UtilisateurDto;
 import com.example.cmuspring.Model.Utilisateur;
 import com.example.cmuspring.Repository.UtilisateurRepository;
 import com.example.cmuspring.Service.UtilisateurService;
@@ -17,9 +18,21 @@ public class UtilisateurServiceImp implements UtilisateurService {
     }
 
     UtilisateurRepository utilisateurRepository;
+
     @Override
-    public Utilisateur loadUserById(String id) {
+    public UtilisateurDto loadUserById(String id) {
         Optional<Utilisateur> donnee = utilisateurRepository.findById(id);
-        return donnee.orElseThrow(() -> new EntityNotFoundException(id));
+        return UtilisateurDto.fromEntity(donnee.orElse(null));
     }
+
+    @Override
+    public UtilisateurDto save(UtilisateurDto dto) {
+        return UtilisateurDto.fromEntity(utilisateurRepository.save(UtilisateurDto.toEntity(dto)));
+    }
+
+//    @Override
+//    public Utilisateur loadUserById(String id) {
+//        Optional<Utilisateur> donnee = utilisateurRepository.findById(id);
+//        return donnee.orElseThrow(() -> new EntityNotFoundException(id));
+//    }
 }
