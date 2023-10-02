@@ -16,6 +16,6 @@ public interface ApiConsultation {
             ,@PathVariable("DiscussionSymptomes") String DiscussionSymptomes, @PathVariable("diagnostic")String diagnostic,@PathVariable("ordonnance") String ordonnance);
 
 
-    @GetMapping(value = Api+"voirConsultation/{numero_CMU}" )
+    @GetMapping(value = Api+"voirConsultation/{numero_CMU}",produces = MediaType.APPLICATION_JSON_VALUE)
     ConsultationDto VoirConsultationn(@PathVariable("numero_CMU") String numero_CMU);
 }

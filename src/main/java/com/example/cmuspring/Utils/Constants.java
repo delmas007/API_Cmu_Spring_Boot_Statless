@@ -2,5 +2,5 @@ package com.example.cmuspring.Utils;
 
 public interface Constants {
 
-    String Api = "cmu/";
+    String Api = "v1/cmu";
 }

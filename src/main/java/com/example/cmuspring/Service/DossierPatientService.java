@@ -14,6 +14,6 @@ public interface DossierPatientService {
 
     DossierPatientDto modifierDossierPatient(String numeroCmu,String antecedentsMedicaux,String historiqueVaccination,String resumesMedicaux);
 
-    int supprimerDossierPatient(String numeroCmu);
+    void supprimerDossierPatient(String numeroCmu);
 
 }

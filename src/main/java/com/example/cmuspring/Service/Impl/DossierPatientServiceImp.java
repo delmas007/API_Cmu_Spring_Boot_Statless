@@ -64,8 +64,7 @@ public class DossierPatientServiceImp implements DossierPatientService {
 
 
     @Override
-    public int supprimerDossierPatient(String numeroCmu) {
+    public void supprimerDossierPatient(String numeroCmu) {
         dossierConsultationRepository.deleteById(numeroCmu);
-        return 1;
     }
 }
