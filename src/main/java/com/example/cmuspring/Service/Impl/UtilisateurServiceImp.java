@@ -6,6 +6,7 @@ import com.example.cmuspring.Model.Utilisateur;
 import com.example.cmuspring.Repository.UtilisateurRepository;
 import com.example.cmuspring.Service.UtilisateurService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,7 @@ import java.util.UUID;
 
 @Service
 public class UtilisateurServiceImp implements UtilisateurService {
-    @Autowired
-    public UtilisateurServiceImp(UtilisateurRepository utilisateurRepository) {
-        this.utilisateurRepository = utilisateurRepository;
-    }
+
 
     UtilisateurRepository utilisateurRepository;
     PasswordEncoder passwordEncoder;

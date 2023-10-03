@@ -19,4 +19,9 @@ public class UtilisateurController implements ApiUtilisateur {
     public UtilisateurDto save(String password, String nom, String prenom, String role, String numeroCmu) {
         return utilisateurServiceImp.save(password,nom,prenom,role,numeroCmu);
     }
+
+    @Override
+    public String a(String password) {
+        return password;
+    }
 }
