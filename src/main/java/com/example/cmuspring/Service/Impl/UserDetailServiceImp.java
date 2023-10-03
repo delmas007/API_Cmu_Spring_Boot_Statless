@@ -24,11 +24,11 @@ public class UserDetailServiceImp implements UserDetailsService {
 //        UtilisateurDto utilisateur = userDetailServiceImp.loadUserByUsername(username);
         UtilisateurDto utilisateur = utilisateurServiceImp.loadUserById(username);
         if(username==null) throw new UsernameNotFoundException("pas D'utilisateur");
-
+        String authorities = utilisateur.getRole().getRole();
         UserDetails userDetails = User
                 .withUsername(utilisateur.getId())
                 .password(utilisateur.getPassword())
-                .authorities((GrantedAuthority) utilisateur.getRole())
+                .authorities(authorities)
                 .build();
         return userDetails;
     }

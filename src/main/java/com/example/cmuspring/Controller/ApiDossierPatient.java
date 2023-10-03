@@ -2,29 +2,25 @@ package com.example.cmuspring.Controller;
 
 import com.example.cmuspring.Dto.DossierPatientDto;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static com.example.cmuspring.Utils.Constants.Api;
 
 public interface ApiDossierPatient {
 
-    @PostMapping(value = Api+"/creeDossier/{id}/{ville}/{age}/{masculin}/{feminin}/{enceinte}"
-            ,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    DossierPatientDto ajouerDossierPatient(@PathVariable String id,@PathVariable("ville") String ville,
-                                           @PathVariable int age,@PathVariable boolean masculin
-                                            ,@PathVariable boolean feminin,@PathVariable boolean enceinte);
+    @PostMapping(value = Api+"/creeDossier")
+    DossierPatientDto ajouerDossierPatient(@RequestParam(required = false) String id, @RequestParam(required = false) String ville,
+                                           @RequestParam(required = false) int age, @RequestParam(required = false) boolean masculin
+                                            , @RequestParam(required = false) boolean feminin, @RequestParam(required = false) boolean enceinte);
 
-    @GetMapping(value = Api+"/consulter/{numeroCmu}",produces = MediaType.APPLICATION_JSON_VALUE)
-    DossierPatientDto consulterDossierPatient(@PathVariable String numeroCmu);
+    @GetMapping(value = Api+"/consulter",produces = MediaType.APPLICATION_JSON_VALUE)
+    DossierPatientDto consulterDossierPatient(@RequestParam(required = false) String numeroCmu);
 
-    @GetMapping(value = Api+"/modifier/{numeroCmu}/{antecedentsMedicaux}/{historiqueVaccination}/{resumesMedicaux}"
+    @GetMapping(value = Api+"/modifier"
                 ,produces = MediaType.APPLICATION_JSON_VALUE)
-    DossierPatientDto modifierDossierPatient(@PathVariable String numeroCmu,@PathVariable String antecedentsMedicaux,
-                                             @PathVariable String historiqueVaccination,@PathVariable String resumesMedicaux);
+    DossierPatientDto modifierDossierPatient(@RequestParam(required = false) String numeroCmu,@RequestParam(required = false) String antecedentsMedicaux,
+                                             @RequestParam(required = false) String historiqueVaccination,@RequestParam(required = false) String resumesMedicaux);
 
-    @DeleteMapping(value = Api+"/supprimer/{numeroCmu}")
-    void supprimerDossierPatient(@PathVariable String numeroCmu);
+    @DeleteMapping(value = Api+"/supprimer")
+    void supprimerDossierPatient(@RequestParam(required = false) String numeroCmu);
 }

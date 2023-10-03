@@ -5,17 +5,18 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static com.example.cmuspring.Utils.Constants.Api;
 
 public interface ApiConsultation {
 
-    @PostMapping(value = Api+"/consultation/{numeroCmu}/{examenPhysique}/{DiscussionSymptomes}/{diagnostic}/{ordonnance}"
+    @PostMapping(value = Api+"/consultation"
             ,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    ConsultationDto save (@PathVariable("numeroCmu") String numeroCmu,@PathVariable("examenPhysique") String examenPhysique
-            ,@PathVariable("DiscussionSymptomes") String DiscussionSymptomes, @PathVariable("diagnostic")String diagnostic,@PathVariable("ordonnance") String ordonnance);
+    ConsultationDto save (@RequestParam(required = false) String numeroCmu, @RequestParam(required = false) String examenPhysique
+            , @RequestParam(required = false) String DiscussionSymptomes, @RequestParam(required = false)String diagnostic, @RequestParam(required = false) String ordonnance);
 
 
-    @GetMapping(value = Api+"voirConsultation/{numero_CMU}",produces = MediaType.APPLICATION_JSON_VALUE)
-    ConsultationDto VoirConsultationn(@PathVariable("numero_CMU") String numero_CMU);
+    @GetMapping(value = Api+"/voirConsultation",produces = MediaType.APPLICATION_JSON_VALUE)
+    ConsultationDto VoirConsultationn(@RequestParam(required = false) String numero_CMU);
 }

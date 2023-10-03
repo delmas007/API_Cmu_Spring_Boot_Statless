@@ -1,6 +1,8 @@
 package com.example.cmuspring.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,6 +46,7 @@ public class Consultation implements Serializable {
 
   private String code;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "numero_CMU")
   private DossierPatient numeroCmu;

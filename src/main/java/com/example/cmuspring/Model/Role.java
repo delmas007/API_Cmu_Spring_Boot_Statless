@@ -1,6 +1,7 @@
 package com.example.cmuspring.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -23,6 +24,7 @@ public class Role implements Serializable {
 
   @Id
   private String role;
+
 
   @OneToMany(mappedBy = "role")
   private List<Utilisateur> utilisateur;

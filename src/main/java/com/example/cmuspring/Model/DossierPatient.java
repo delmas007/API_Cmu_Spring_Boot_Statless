@@ -1,6 +1,9 @@
 package com.example.cmuspring.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,11 +31,11 @@ public class DossierPatient implements Serializable {
   private String numeroCmu;
 
 
-  @CreatedDate
+//  @CreatedDate
   @Column(name = "date_creation")
   private Instant dateCreation;
 
-  @LastModifiedDate
+//  @LastModifiedDate
   @Column(name = "date_modification")
   private Instant dateModification;
 
@@ -55,12 +58,22 @@ public class DossierPatient implements Serializable {
 
   private Boolean enceinte;
 
+  @JsonIgnore
   @OneToOne
   @JoinColumn(name = "id_utilisateur")
   private Utilisateur idUtilisateur;
 
   @OneToMany(mappedBy = "numeroCmu")
   private List<Consultation> consultation;
+
+  @PrePersist
+  void  prePersist(){
+    dateCreation = Instant.now();
+  }
+  @PreUpdate
+  void preUpdate(){
+    dateModification = Instant.now();
+  }
 
 
 

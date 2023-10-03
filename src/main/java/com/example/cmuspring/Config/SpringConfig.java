@@ -35,26 +35,23 @@ public class SpringConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(auth->auth
-                        .requestMatchers("/utilisation/").permitAll()
-                        .requestMatchers("/a/").permitAll()
-                        .requestMatchers(Api+"/consultation/**").hasAuthority("MEDECIN")
-                        .requestMatchers(Api+"/voirConsultation/**").hasAuthority("PATIENT")
-                        .requestMatchers(Api+"/creeDossier/**").hasAuthority("EMPLOYER")
-                        .requestMatchers(Api+"/consulter/**").hasAuthority("MEDECIN")
-                        .requestMatchers(Api+"/modifier/**").hasAuthority("MEDECIN")
-                        .requestMatchers(Api+"/supprimer/**").hasAuthority("EMPLOYER")
+                        .requestMatchers(Api+"/utilisation").permitAll()
+                        .requestMatchers(Api+"/consultation").hasAuthority("MEDECIN")
+                        .requestMatchers(Api+"/voirConsultation").hasAuthority("PATIENT")
+                        .requestMatchers(Api+"/creeDossier").hasAuthority("EMPLOYER")
+                        .requestMatchers(Api+"/consulter").hasAuthority("MEDECIN")
+                        .requestMatchers(Api+"/modifier").hasAuthority("MEDECIN")
+                        .requestMatchers(Api+"/supprimer").hasAuthority("EMPLOYER")
                         .anyRequest()
                         .authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(Customizer.withDefaults())
                 .userDetailsService(userDetailServiceImp);
 
         return httpSecurity.build();
     }
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return  new BCryptPasswordEncoder();
-    }
+
 
 //    @Bean
 //    public InMemoryUserDetailsManager userDetailsService() {
