@@ -13,11 +13,10 @@ public interface ApiDossierPatient {
                                            @RequestParam(required = false) int age, @RequestParam(required = false) boolean masculin
                                             , @RequestParam(required = false) boolean feminin, @RequestParam(required = false) boolean enceinte);
 
-    @GetMapping(value = Api+"/consulter",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Api+"/consulter")
     DossierPatientDto consulterDossierPatient(@RequestParam(required = false) String numeroCmu);
 
-    @GetMapping(value = Api+"/modifier"
-                ,produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = Api+"/modifier")
     DossierPatientDto modifierDossierPatient(@RequestParam(required = false) String numeroCmu,@RequestParam(required = false) String antecedentsMedicaux,
                                              @RequestParam(required = false) String historiqueVaccination,@RequestParam(required = false) String resumesMedicaux);
 

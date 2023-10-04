@@ -21,7 +21,6 @@ public class UserDetailServiceImp implements UserDetailsService {
     UtilisateurServiceImp utilisateurServiceImp;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        UtilisateurDto utilisateur = userDetailServiceImp.loadUserByUsername(username);
         UtilisateurDto utilisateur = utilisateurServiceImp.loadUserById(username);
         if(username==null) throw new UsernameNotFoundException("pas D'utilisateur");
         String authorities = utilisateur.getRole().getRole();
