@@ -5,7 +5,6 @@ import com.example.cmuspring.Model.DossierPatient;
 import com.example.cmuspring.Model.Utilisateur;
 import com.example.cmuspring.Repository.DossierConsultationRepository;
 import com.example.cmuspring.Service.DossierPatientService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
