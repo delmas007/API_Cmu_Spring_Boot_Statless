@@ -1,8 +1,6 @@
 package com.example.cmuspring.Controller;
 
 import com.example.cmuspring.Dto.UtilisateurDto;
-import jakarta.websocket.server.PathParam;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import static com.example.cmuspring.Utils.Constants.Api;

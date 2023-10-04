@@ -1,7 +1,6 @@
 package com.example.cmuspring.Controller;
 
 import com.example.cmuspring.Dto.DossierPatientDto;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import static com.example.cmuspring.Utils.Constants.Api;
