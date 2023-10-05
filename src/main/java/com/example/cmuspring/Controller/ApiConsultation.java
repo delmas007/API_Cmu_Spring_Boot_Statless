@@ -1,9 +1,7 @@
 package com.example.cmuspring.Controller;
 
 import com.example.cmuspring.Dto.ConsultationDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import static com.example.cmuspring.Utils.Constants.Api;
 
@@ -16,4 +14,9 @@ public interface ApiConsultation {
 
     @GetMapping(value = Api+"/voirConsultation")
     ConsultationDto VoirConsultationn(@RequestParam(required = false) String numero_CMU);
+
+//    @GetMapping(value = Api+"/voirConsultation{numero_CMU}")
+//    ConsultationDto VoirConsultationn(@PathVariable String numero_CMU);
+
+
 }
