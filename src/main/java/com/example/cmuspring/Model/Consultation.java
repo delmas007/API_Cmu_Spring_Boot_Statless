@@ -27,7 +27,7 @@ public class Consultation implements Serializable {
   @GeneratedValue
   private Integer id;
 
-  @Column(name = "date_creation")
+  @Column(name = "date_creation",nullable = false,updatable = false)
   @CreatedDate
   private Instant dateCreation;
 

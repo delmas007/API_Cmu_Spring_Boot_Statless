@@ -31,11 +31,11 @@ public class DossierPatient implements Serializable {
   private String numeroCmu;
 
 
-//  @CreatedDate
+  @CreatedDate
   @Column(name = "date_creation")
   private Instant dateCreation;
 
-//  @LastModifiedDate
+  @LastModifiedDate
   @Column(name = "date_modification")
   private Instant dateModification;
 
@@ -66,14 +66,14 @@ public class DossierPatient implements Serializable {
   @OneToMany(mappedBy = "numeroCmu")
   private List<Consultation> consultation;
 
-  @PrePersist
-  void  prePersist(){
-    dateCreation = Instant.now();
-  }
-  @PreUpdate
-  void preUpdate(){
-    dateModification = Instant.now();
-  }
+//  @PrePersist
+//  void  prePersist(){
+//    dateCreation = Instant.now();
+//  }
+//  @PreUpdate
+//  void preUpdate(){
+//    dateModification = Instant.now();
+//  }
 
 
 
