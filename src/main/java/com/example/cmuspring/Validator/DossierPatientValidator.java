@@ -11,7 +11,6 @@ public class DossierPatientValidator {
 
         List<String> donne = new ArrayList<>();
 
-        if
 
         return  null;
     }
