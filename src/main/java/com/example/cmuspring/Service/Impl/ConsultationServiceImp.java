@@ -27,16 +27,15 @@ public class ConsultationServiceImp implements ConsultationService {
     DossierPatientServiceImp dossierPatientServiceImp;
 
     @Override
-    public ConsultationDto save(String numeroCmu, String examenPhysique, String DiscussionSymptomes,
-                                String diagnostic, String ordonnance) {
-        DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numeroCmu);
+    public ConsultationDto save(ConsultationDto dto) {
+        DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(dto.getNumeroCmu().toString());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
         Consultation donnee = Consultation.builder()
-                .examenPhysique(examenPhysique)
-                .diagnostic(diagnostic)
-                .discussionDesSymptomes(DiscussionSymptomes)
-                .ordonnance(ordonnance)
+                .examenPhysique(dto.getExamenPhysique())
+                .diagnostic(dto.getDiagnostic())
+                .discussionDesSymptomes(dto.getDiscussionDesSymptomes())
+                .ordonnance(dto.getOrdonnance())
                 .idUtilisateur(principal)
                 .code(UUID.randomUUID().toString())
                 .numeroCmu(DossierPatientDto.toEntity(dossier))

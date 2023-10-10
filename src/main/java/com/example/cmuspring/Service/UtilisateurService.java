@@ -9,6 +9,5 @@ public interface UtilisateurService {
 
     UtilisateurDto loadUserById(String id);
 
-    UtilisateurDto save(String password,String nom,String prenom,
-                        String role,String numeroCmu);
+    UtilisateurDto save(UtilisateurDto dto);
 }

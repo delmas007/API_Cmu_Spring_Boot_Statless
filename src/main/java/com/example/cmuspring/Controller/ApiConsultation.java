@@ -8,8 +8,7 @@ import static com.example.cmuspring.Utils.Constants.Api;
 public interface ApiConsultation {
 
     @PostMapping(value = Api+"/consultation")
-    ConsultationDto save (@RequestParam(required = false) String numeroCmu, @RequestParam(required = false) String examenPhysique
-            , @RequestParam(required = false) String DiscussionSymptomes, @RequestParam(required = false)String diagnostic, @RequestParam(required = false) String ordonnance);
+    ConsultationDto save (@RequestBody ConsultationDto dto);
 
 
     @GetMapping(value = Api+"/voirConsultation")

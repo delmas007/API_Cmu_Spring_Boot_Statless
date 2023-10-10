@@ -18,9 +18,8 @@ public class ConsultationController implements ApiConsultation {
 
 
     @Override
-    public ConsultationDto save(String numeroCmu, String examenPhysique,
-                                String DiscussionSymptomes, String diagnostic, String ordonnance) {
-        return consultationServiceImp.save(numeroCmu,examenPhysique,DiscussionSymptomes,diagnostic,ordonnance);
+    public ConsultationDto save(ConsultationDto dto) {
+        return consultationServiceImp.save(dto);
     }
 
     @Override

@@ -29,14 +29,14 @@ public class UtilisateurServiceImp implements UtilisateurService {
     }
 
     @Override
-    public UtilisateurDto save(String password, String nom, String prenom, String role, String numeroCmu) {
+    public UtilisateurDto save(UtilisateurDto dto) {
         UtilisateurDto utilisateurDto = UtilisateurDto.builder()
                 .id(UUID.randomUUID().toString())
-                .password(passwordEncoder.encode(password))
-                .nom(nom)
-                .prenom(prenom)
-                .role(Role.builder().role(role.toUpperCase()).build())
-                .numeroCmu(numeroCmu)
+                .password(passwordEncoder.encode(dto.getPassword()))
+                .nom(dto.getNom())
+                .prenom(dto.getPrenom())
+                .role(Role.builder().role(dto.getRole().toString().toUpperCase()).build())
+                .numeroCmu(dto.getNumeroCmu())
                 .build();
         return UtilisateurDto.fromEntity(utilisateurRepository.save(UtilisateurDto.toEntity(utilisateurDto)));
     }
