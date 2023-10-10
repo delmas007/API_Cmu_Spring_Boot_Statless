@@ -32,7 +32,6 @@ public class ConsultationServiceImp implements ConsultationService {
         DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numeroCmu);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
-        System.out.println(principal);
         Consultation donnee = Consultation.builder()
                 .examenPhysique(examenPhysique)
                 .diagnostic(diagnostic)

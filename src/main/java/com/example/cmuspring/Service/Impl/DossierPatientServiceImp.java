@@ -23,17 +23,16 @@ public class DossierPatientServiceImp implements DossierPatientService {
     }
 
     @Override
-    public DossierPatientDto ajouerDossierPatient(String id,String ville
-            , int age, boolean masculin, boolean feminin, boolean enceinte) {
+    public DossierPatientDto ajouerDossierPatient(DossierPatientDto dto) {
         String numCmu = UUID.randomUUID().toString();
         DossierPatient donnee = DossierPatient.builder()
                 .numeroCmu(numCmu)
-                .ville(ville)
-                .age(age)
-                .masculin(masculin)
-                .feminin(feminin)
-                .enceinte(enceinte)
-                .idUtilisateur(Utilisateur.builder().id(id).build())
+                .ville(dto.getVille())
+                .age(dto.getAge())
+                .masculin(dto.getMasculin())
+                .feminin(dto.getFeminin())
+                .enceinte(dto.getEnceinte())
+                .idUtilisateur(Utilisateur.builder().id(dto.getIdUtilisateur().getId()).build())
                 .build();
 
         return DossierPatientDto.fromEntity(dossierConsultationRepository.save(donnee));
@@ -52,12 +51,11 @@ public class DossierPatientServiceImp implements DossierPatientService {
     }
 
     @Override
-    public DossierPatientDto modifierDossierPatient(String numeroCmu, String antecedentsMedicaux,
-                                                    String historiqueVaccination, String resumesMedicaux) {
-        DossierPatient donnee = dossierConsultationRepository.findByNumeroCmu(numeroCmu);
-        donnee.setAntecedentMedicaux(antecedentsMedicaux);
-        donnee.setHistoriqueDeVaccination(historiqueVaccination);
-        donnee.setResumesMedicaux(resumesMedicaux);
+    public DossierPatientDto modifierDossierPatient(DossierPatientDto dto) {
+        DossierPatient donnee = dossierConsultationRepository.findByNumeroCmu(dto.getNumeroCmu());
+        donnee.setAntecedentMedicaux(dto.getAntecedentMedicaux());
+        donnee.setHistoriqueDeVaccination(dto.getHistoriqueDeVaccination());
+        donnee.setResumesMedicaux(dto.getResumesMedicaux());
         return DossierPatientDto.fromEntity(dossierConsultationRepository.save(donnee));
     }
 

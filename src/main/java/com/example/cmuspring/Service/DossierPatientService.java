@@ -7,12 +7,11 @@ import org.springframework.stereotype.Service;
 
 public interface DossierPatientService {
 
-    DossierPatientDto ajouerDossierPatient(String id,String ville,
-                                           int age,boolean masculin,boolean feminin,boolean enceinte);
+    DossierPatientDto ajouerDossierPatient(DossierPatientDto dossierPatientDto);
 
     DossierPatientDto consulterDossierPatient(String numeroCmu);
 
-    DossierPatientDto modifierDossierPatient(String numeroCmu,String antecedentsMedicaux,String historiqueVaccination,String resumesMedicaux);
+    DossierPatientDto modifierDossierPatient(DossierPatientDto dossierPatientDto);
 
     void supprimerDossierPatient(String numeroCmu);
 

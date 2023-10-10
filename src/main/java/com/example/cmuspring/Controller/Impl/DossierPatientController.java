@@ -16,8 +16,8 @@ public class DossierPatientController implements ApiDossierPatient {
 
 
     @Override
-    public DossierPatientDto ajouerDossierPatient(String id, String ville, int age, boolean masculin, boolean feminin, boolean enceinte) {
-        return dossierPatientServiceImp.ajouerDossierPatient(id,ville,age,masculin,feminin,enceinte);
+    public DossierPatientDto ajouerDossierPatient(DossierPatientDto dto) {
+        return dossierPatientServiceImp.ajouerDossierPatient(dto);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class DossierPatientController implements ApiDossierPatient {
     }
 
     @Override
-    public DossierPatientDto modifierDossierPatient(String numeroCmu, String antecedentsMedicaux, String historiqueVaccination, String resumesMedicaux) {
-        return dossierPatientServiceImp.modifierDossierPatient(numeroCmu,antecedentsMedicaux,historiqueVaccination,resumesMedicaux);
+    public DossierPatientDto modifierDossierPatient(DossierPatientDto dto) {
+        return dossierPatientServiceImp.modifierDossierPatient(dto);
     }
 
     @Override
