@@ -29,4 +29,11 @@ public class UtilisateurValidator {
         }
         return donne;
     }
+    public static String utilisateurId(String id){
+        String a = null;
+        if(!StringUtils.hasLength(id)){
+            a=("id inexistant");
+        }
+        return a;
+    }
 }

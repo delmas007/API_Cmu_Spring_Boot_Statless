@@ -1,21 +1,27 @@
 package com.example.cmuspring.Service.Impl;
 
 import com.example.cmuspring.Dto.UtilisateurDto;
+import com.example.cmuspring.Exception.EntityNotFoundException;
+import com.example.cmuspring.Exception.ErrorCodes;
+import com.example.cmuspring.Exception.InvalidEntityException;
 import com.example.cmuspring.Model.Role;
 import com.example.cmuspring.Model.Utilisateur;
 import com.example.cmuspring.Repository.UtilisateurRepository;
 import com.example.cmuspring.Service.UtilisateurService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import static com.example.cmuspring.Validator.UtilisateurValidator.utilisateurId;
+import static com.example.cmuspring.Validator.UtilisateurValidator.utilisateurValidator;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UtilisateurServiceImp implements UtilisateurService {
 
 
@@ -24,12 +30,19 @@ public class UtilisateurServiceImp implements UtilisateurService {
 
     @Override
     public UtilisateurDto loadUserById(String id) {
+        String a = utilisateurId(id);
         Optional<Utilisateur> donnee = utilisateurRepository.findById(id);
-        return UtilisateurDto.fromEntity(donnee.orElse(null));
+        return UtilisateurDto.fromEntity(donnee.orElseThrow(()-> new EntityNotFoundException("Utilisateur pas trouver",
+                ErrorCodes.UTILISATEUR_PAS_TROUVER,a)));
     }
 
     @Override
     public UtilisateurDto save(String role,UtilisateurDto dto) {
+        List<String> errors = utilisateurValidator(role,dto);
+        if (!errors.isEmpty()){
+            log.error(errors.toString());
+            throw new InvalidEntityException("Verrifier vos identifiant",ErrorCodes.UTILISATEUR_PAS_VALID,errors);
+        }
         UtilisateurDto utilisateurDto = UtilisateurDto.builder()
                 .id(UUID.randomUUID().toString())
                 .password(passwordEncoder.encode(dto.getPassword()))

@@ -22,7 +22,7 @@ public class UserDetailServiceImp implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UtilisateurDto utilisateur = utilisateurServiceImp.loadUserById(username);
-        if(username==null) throw new UsernameNotFoundException("pas D'utilisateur");
+        if(utilisateur==null) throw new UsernameNotFoundException("pas D'utilisateur");
         String authorities = utilisateur.getRole().getRole();
         UserDetails userDetails = User
                 .withUsername(utilisateur.getId())
