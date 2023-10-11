@@ -2,10 +2,13 @@ package com.example.cmuspring.Service.Impl;
 
 import com.example.cmuspring.Dto.ConsultationDto;
 import com.example.cmuspring.Dto.DossierPatientDto;
+import com.example.cmuspring.Exception.ErrorCodes;
+import com.example.cmuspring.Exception.InvalidEntityException;
+import com.example.cmuspring.Exception.EntityNotFoundException;
 import com.example.cmuspring.Model.Consultation;
 import com.example.cmuspring.Repository.ConsultationRepository;
 import com.example.cmuspring.Service.ConsultationService;
-import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,8 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
+
+import static com.example.cmuspring.Validator.ConsultationValidator.consultation;
+
 @Service
 @Transactional
+@Slf4j
 public class ConsultationServiceImp implements ConsultationService {
     ConsultationRepository consultationRepository;
 
@@ -28,6 +35,11 @@ public class ConsultationServiceImp implements ConsultationService {
 
     @Override
     public ConsultationDto save(String numeroCmu,ConsultationDto dto) {
+        String num = consultation(numeroCmu);
+        if(!num.isEmpty()){
+            log.error(num);
+            throw new EntityNotFoundException("numero cmu inexistant",ErrorCodes.CONSULTATION_PAS_TROUVER,num);
+        }
         DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numeroCmu);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
@@ -54,10 +66,13 @@ public class ConsultationServiceImp implements ConsultationService {
 
     @Override
     public ConsultationDto voirConsultation(String numero_CMU) {
+        String num = consultation(numero_CMU);
+        if(!num.isEmpty()){
+            log.error(num);
+        }
         DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numero_CMU);
         return consultationRepository.findByNumeroCmu(DossierPatientDto.toEntity(dossier)).map(ConsultationDto::fromEntity)
-                .orElseThrow(() -> new EntityNotFoundException(
-                "Aucune consultation relier a ce numero cmu")
+                .orElseThrow(() -> new EntityNotFoundException("numero cmu inexistant",ErrorCodes.CONSULTATION_PAS_TROUVER,num)
         );
     }
 
