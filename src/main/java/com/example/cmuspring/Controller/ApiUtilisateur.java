@@ -7,8 +7,8 @@ import static com.example.cmuspring.Utils.Constants.Api;
 
 public interface ApiUtilisateur {
 
-    @PostMapping(value = Api+"/utilisation")
-    UtilisateurDto save(@RequestBody UtilisateurDto dto);
+    @PostMapping(value = Api+"/utilisateur")
+    UtilisateurDto save(@RequestParam String role,@RequestBody UtilisateurDto dto);
 
 
 }

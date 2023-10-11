@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class ConsultationDto {
 
+
     private Integer id;
 
     private String examenPhysique;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 public interface ConsultationService {
 
-    ConsultationDto save(ConsultationDto dto);
+    ConsultationDto save(String numeroCmu,ConsultationDto dto);
 
     ConsultationDto voirConsultation(String numero_CMU);
 }

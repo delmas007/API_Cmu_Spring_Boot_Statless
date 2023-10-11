@@ -16,7 +16,7 @@ public class UtilisateurController implements ApiUtilisateur {
     UtilisateurServiceImp utilisateurServiceImp;
 
     @Override
-    public UtilisateurDto save(UtilisateurDto dto) {
-        return utilisateurServiceImp.save(dto);
+    public UtilisateurDto save(String role,UtilisateurDto dto) {
+        return utilisateurServiceImp.save(role, dto);
     }
 }

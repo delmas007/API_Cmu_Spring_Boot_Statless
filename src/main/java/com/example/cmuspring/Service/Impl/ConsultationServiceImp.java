@@ -27,8 +27,8 @@ public class ConsultationServiceImp implements ConsultationService {
     DossierPatientServiceImp dossierPatientServiceImp;
 
     @Override
-    public ConsultationDto save(ConsultationDto dto) {
-        DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(dto.getNumeroCmu().toString());
+    public ConsultationDto save(String numeroCmu,ConsultationDto dto) {
+        DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numeroCmu);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
         Consultation donnee = Consultation.builder()

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 public interface DossierPatientService {
 
-    DossierPatientDto ajouerDossierPatient(DossierPatientDto dossierPatientDto);
+    DossierPatientDto ajouerDossierPatient(String id,DossierPatientDto dossierPatientDto);
 
     DossierPatientDto consulterDossierPatient(String numeroCmu);
 

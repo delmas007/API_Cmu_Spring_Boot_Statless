@@ -13,7 +13,7 @@ public interface ApiDossierPatient {
 //                                            , @RequestParam(required = false) boolean feminin, @RequestParam(required = false) boolean enceinte);
 
     @PostMapping(value = Api+"/creeDossier")
-    DossierPatientDto ajouerDossierPatient(@RequestBody DossierPatientDto dto);
+    DossierPatientDto ajouerDossierPatient(@RequestParam String id,@RequestBody DossierPatientDto dto);
 
     @GetMapping(value = Api+"/consulter")
     DossierPatientDto consulterDossierPatient(@RequestParam(required = false) String numeroCmu);

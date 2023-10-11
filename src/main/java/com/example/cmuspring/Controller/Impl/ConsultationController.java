@@ -18,8 +18,8 @@ public class ConsultationController implements ApiConsultation {
 
 
     @Override
-    public ConsultationDto save(ConsultationDto dto) {
-        return consultationServiceImp.save(dto);
+    public ConsultationDto save(String numeroCmu,ConsultationDto dto) {
+        return consultationServiceImp.save(numeroCmu,dto);
     }
 
     @Override

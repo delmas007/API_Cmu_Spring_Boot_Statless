@@ -16,8 +16,8 @@ public class DossierPatientController implements ApiDossierPatient {
 
 
     @Override
-    public DossierPatientDto ajouerDossierPatient(DossierPatientDto dto) {
-        return dossierPatientServiceImp.ajouerDossierPatient(dto);
+    public DossierPatientDto ajouerDossierPatient(String id,DossierPatientDto dto) {
+        return dossierPatientServiceImp.ajouerDossierPatient(id,dto);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class DossierPatientServiceImp implements DossierPatientService {
     }
 
     @Override
-    public DossierPatientDto ajouerDossierPatient(DossierPatientDto dto) {
+    public DossierPatientDto ajouerDossierPatient(String id ,DossierPatientDto dto) {
         String numCmu = UUID.randomUUID().toString();
         DossierPatient donnee = DossierPatient.builder()
                 .numeroCmu(numCmu)
@@ -32,7 +32,7 @@ public class DossierPatientServiceImp implements DossierPatientService {
                 .masculin(dto.getMasculin())
                 .feminin(dto.getFeminin())
                 .enceinte(dto.getEnceinte())
-                .idUtilisateur(Utilisateur.builder().id(dto.getIdUtilisateur().getId()).build())
+                .idUtilisateur(Utilisateur.builder().id(id).build())
                 .build();
 
         return DossierPatientDto.fromEntity(dossierConsultationRepository.save(donnee));

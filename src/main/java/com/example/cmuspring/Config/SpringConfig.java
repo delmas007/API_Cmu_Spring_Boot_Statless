@@ -21,6 +21,7 @@ public class SpringConfig {
     private static final String[] MEDECIN = {Api + "/consulter", Api + "/modifier",Api + "/consultation"};
     private static final String[] EMPLOYER = {Api + "/creeDossier", Api + "/supprimer"};
     private static final String PATIENT = Api + "/voirConsultation";
+    private static final String UTILISATEUR = Api + "/utilisateur";
 
     @Autowired
     public SpringConfig( UserDetailServiceImp userDetailServiceImp) {
@@ -33,10 +34,10 @@ public class SpringConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(auth-> auth
-                        .requestMatchers(Api + "/utilisation").permitAll()
                         .requestMatchers(PATIENT).hasAuthority("PATIENT")
                         .requestMatchers(EMPLOYER).hasAuthority("EMPLOYER")
                         .requestMatchers(MEDECIN).hasAuthority("MEDECIN")
+                        .requestMatchers(UTILISATEUR).permitAll()
                         .anyRequest()
                         .authenticated()
                 )
