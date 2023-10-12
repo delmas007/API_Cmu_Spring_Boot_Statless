@@ -1,6 +1,7 @@
 package com.example.cmuspring.Service.Impl;
 
 import com.example.cmuspring.Dto.DossierPatientDto;
+import com.example.cmuspring.Dto.UtilisateurDto;
 import com.example.cmuspring.Exception.EntityNotFoundException;
 import com.example.cmuspring.Exception.ErrorCodes;
 import com.example.cmuspring.Exception.InvalidEntityException;
@@ -12,11 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.UUID;
 
 import static com.example.cmuspring.Validator.DossierPatientValidator.dossierPatientValidatorAjouter;
+import static com.example.cmuspring.Validator.DossierPatientValidator.dossierPatientValidatorId;
 
 @Service
 @Transactional
@@ -24,19 +27,24 @@ import static com.example.cmuspring.Validator.DossierPatientValidator.dossierPat
 public class DossierPatientServiceImp implements DossierPatientService {
 
     DossierConsultationRepository dossierConsultationRepository;
+    UtilisateurServiceImp utilisateurServiceImp;
+
 
     @Autowired
-    public DossierPatientServiceImp(DossierConsultationRepository dossierConsultationRepository) {
+    public DossierPatientServiceImp(DossierConsultationRepository dossierConsultationRepository,
+                                    UtilisateurServiceImp utilisateurServiceImp) {
         this.dossierConsultationRepository = dossierConsultationRepository;
-    }
+        this.utilisateurServiceImp=utilisateurServiceImp;    }
 
     @Override
     public DossierPatientDto ajouerDossierPatient(String id ,DossierPatientDto dto) {
-        List<String> error =dossierPatientValidatorAjouter(dto);
-        if(!error.isEmpty()){
-            log.error(error.toString());
+
+        List<String> errors =dossierPatientValidatorAjouter(dto);
+        UtilisateurDto ab = utilisateurServiceImp.loadUserById(id);
+        if(!errors.isEmpty()){
+            log.error(errors.toString());
             throw new InvalidEntityException("Verifier si vous avez correctement rempli",
-                    ErrorCodes.DOSSIER_PATIENT_PAS_VALID,error);
+                    ErrorCodes.DOSSIER_PATIENT_PAS_VALID,errors);
         }
         String numCmu = UUID.randomUUID().toString();
         DossierPatient donnee = DossierPatient.builder()
@@ -46,7 +54,7 @@ public class DossierPatientServiceImp implements DossierPatientService {
                 .masculin(dto.getMasculin())
                 .feminin(dto.getFeminin())
                 .enceinte(dto.getEnceinte())
-                .idUtilisateur(Utilisateur.builder().id(id).build())
+                .idUtilisateur(UtilisateurDto.toEntity(ab))
                 .build();
 
         return DossierPatientDto.fromEntity(dossierConsultationRepository.save(donnee));

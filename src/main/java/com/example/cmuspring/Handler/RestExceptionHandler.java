@@ -32,6 +32,7 @@ public class RestExceptionHandler {
                 .httpCode(badRequest.value())
                 .code(exception.getErrorCodes())
                 .message(exception.getMessage())
+                .errors(exception.getError())
                 .build();
         return new ResponseEntity<>(errorDto,badRequest);
     }

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface UtilisateurService {
 
-    UtilisateurDto loadUserById(String id);
+     UtilisateurDto loadUserById(String id);
 
     UtilisateurDto save(String role,UtilisateurDto dto);
 }

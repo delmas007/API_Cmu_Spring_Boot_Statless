@@ -11,7 +11,7 @@ public class ConsultationValidator {
         public static String consultation(String numeroCmu){
             String a = null;
             if (!StringUtils.hasLength(numeroCmu)) {
-                a = ("Veillez renseigner le numero Cmu");
+                a = "Veillez renseigner le numero Cmu";
             }
             return a;
         }

@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
 import java.util.UUID;
 
 
@@ -35,12 +37,11 @@ public class ConsultationServiceImp implements ConsultationService {
 
     @Override
     public ConsultationDto save(String numeroCmu,ConsultationDto dto) {
-        String num = consultation(numeroCmu);
-        if(!num.isEmpty()){
-            log.error(num);
-            throw new EntityNotFoundException("numero cmu inexistant",ErrorCodes.CONSULTATION_PAS_TROUVER,num);
+        if(!StringUtils.hasLength(numeroCmu)){
+            throw new EntityNotFoundException("numero cmu inexistant",ErrorCodes.CONSULTATION_PAS_VALIDE);
         }
         DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numeroCmu);
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
         Consultation donnee = Consultation.builder()
@@ -67,7 +68,7 @@ public class ConsultationServiceImp implements ConsultationService {
     @Override
     public ConsultationDto voirConsultation(String numero_CMU) {
         String num = consultation(numero_CMU);
-        if(!num.isEmpty()){
+        if(!StringUtils.hasLength(num)){
             log.error(num);
         }
         DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numero_CMU);
