@@ -18,8 +18,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.UUID;
 
-import static com.example.cmuspring.Validator.DossierPatientValidator.dossierPatientValidatorAjouter;
-import static com.example.cmuspring.Validator.DossierPatientValidator.dossierPatientValidatorId;
+import static com.example.cmuspring.Validator.DossierPatientValidator.*;
 
 @Service
 @Transactional
@@ -63,18 +62,14 @@ public class DossierPatientServiceImp implements DossierPatientService {
 
     @Override
     public DossierPatientDto consulterDossierPatient(String numeroCmu) {
-
-//        return dossierConsultationRepository.findByNumeroCmu(numeroCmu)
-//                .map(DossierPatientDto::fromEntity)
-//                .orElseThrow(() -> new EntityNotFoundException(
-//                        "Aucun Dossier n'est relier a ce numero cmu")
-//                );
-        return DossierPatientDto.fromEntity(dossierConsultationRepository.findByNumeroCmu(numeroCmu));
+        return DossierPatientDto.fromEntity(dossierConsultationRepository.findByNumeroCmu(numeroCmu).orElseThrow(()->
+                new EntityNotFoundException("Dossier patient inexistant avec le numero cmu: "+numeroCmu,ErrorCodes.DOSSIER_PATIENT_PAS_TROUVER)
+        ));
     }
 
     @Override
     public DossierPatientDto modifierDossierPatient(DossierPatientDto dto) {
-        DossierPatient donnee = dossierConsultationRepository.findByNumeroCmu(dto.getNumeroCmu());
+        DossierPatient donnee =DossierPatientDto.toEntity(consulterDossierPatient(dto.getNumeroCmu()));
         donnee.setAntecedentMedicaux(dto.getAntecedentMedicaux());
         donnee.setHistoriqueDeVaccination(dto.getHistoriqueDeVaccination());
         donnee.setResumesMedicaux(dto.getResumesMedicaux());

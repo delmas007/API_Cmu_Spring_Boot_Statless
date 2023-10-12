@@ -73,7 +73,7 @@ public class ConsultationServiceImp implements ConsultationService {
         }
         DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numero_CMU);
         return consultationRepository.findByNumeroCmu(DossierPatientDto.toEntity(dossier)).map(ConsultationDto::fromEntity)
-                .orElseThrow(() -> new EntityNotFoundException("numero cmu inexistant",ErrorCodes.CONSULTATION_PAS_TROUVER,num)
+                .orElseThrow(() -> new EntityNotFoundException("Aucune consultation lier au numero cmu",ErrorCodes.CONSULTATION_PAS_TROUVER)
         );
     }
 

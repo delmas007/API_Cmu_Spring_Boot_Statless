@@ -30,10 +30,9 @@ public class UtilisateurServiceImp implements UtilisateurService {
 
     @Override
     public UtilisateurDto loadUserById(String id) {
-        String a = utilisateurId(id);
         Optional<Utilisateur> donnee = utilisateurRepository.findById(id);
-        return UtilisateurDto.fromEntity(donnee.orElseThrow(()-> new EntityNotFoundException("Utilisateur pas trouver",
-                ErrorCodes.UTILISATEUR_PAS_TROUVER,a)));
+        return UtilisateurDto.fromEntity(donnee.orElseThrow(()-> new EntityNotFoundException("Utilisateur pas trouver ",
+                ErrorCodes.UTILISATEUR_PAS_TROUVER)));
     }
 
     @Override
@@ -41,7 +40,7 @@ public class UtilisateurServiceImp implements UtilisateurService {
         List<String> errors = utilisateurValidator(role,dto);
         if (!errors.isEmpty()){
             log.error(errors.toString());
-            throw new InvalidEntityException("Verrifier vos identifiant",ErrorCodes.UTILISATEUR_PAS_VALID,errors);
+            throw new InvalidEntityException("Verrifier vos information si elle sont correctes",ErrorCodes.UTILISATEUR_PAS_VALID,errors);
         }
         UtilisateurDto utilisateurDto = UtilisateurDto.builder()
                 .id(UUID.randomUUID().toString())

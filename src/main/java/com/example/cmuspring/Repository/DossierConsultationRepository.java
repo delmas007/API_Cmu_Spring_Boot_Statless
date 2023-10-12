@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface DossierConsultationRepository extends JpaRepository<DossierPatient,String> {
 
 
-    DossierPatient findByNumeroCmu(String numeroCmu);
+    Optional<DossierPatient> findByNumeroCmu(String numeroCmu);
 }
