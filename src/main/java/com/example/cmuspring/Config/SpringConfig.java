@@ -22,6 +22,15 @@ public class SpringConfig {
     private static final String[] EMPLOYER = {Api + "/creeDossier", Api + "/supprimer"};
     private static final String PATIENT = Api + "/voirConsultation";
     private static final String UTILISATEUR = Api + "/utilisateur";
+    private static final String[] SWAGGER = {"/swagger-ui/**",
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**"};
 
     @Autowired
     public SpringConfig( UserDetailServiceImp userDetailServiceImp) {
@@ -37,6 +46,7 @@ public class SpringConfig {
                         .requestMatchers(PATIENT).hasAuthority("PATIENT")
                         .requestMatchers(EMPLOYER).hasAuthority("EMPLOYER")
                         .requestMatchers(MEDECIN).hasAuthority("MEDECIN")
+                        .requestMatchers(SWAGGER).permitAll()
                         .requestMatchers(UTILISATEUR).permitAll()
                         .anyRequest()
                         .authenticated()
