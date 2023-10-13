@@ -16,7 +16,7 @@ public interface ApiConsultation {
     @ApiOperation(value = "Enregistrer une consultation", notes = "Cette methode permet d'enregistrer  une consultation", response =
             ConsultationDto.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "L'objet consultation cree / modifie"),
+            @ApiResponse(code = 200, message = "L'objet consultation cree"),
             @ApiResponse(code = 400, message = "L'objet consultation n'est pas valide")
     })
     ConsultationDto save (String numeroCmu,@RequestBody ConsultationDto dto);

@@ -19,7 +19,7 @@ public interface ApiDossierPatient {
 //                                            , @RequestParam(required = false) boolean feminin, @RequestParam(required = false) boolean enceinte);
 
     @PostMapping(value = Api+"/creeDossier")
-    @ApiOperation(value = "Enregistrer un dossier patient", notes = "Cette methode permet d'enregistrer  un dossier patient", response =
+    @ApiOperation(value = "Enregistrer un dossier patient", notes = "Cette methode permet d'enregistrer un dossier patient", response =
             DossierPatientDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet dossier patient cree / modifie"),
@@ -43,11 +43,15 @@ public interface ApiDossierPatient {
     @ApiOperation(value = "Modifier un dossier patient", notes = "Cette methode permet modifier un dossier patient", response =
             DossierPatientDto.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "L'objet dossier patient cree / modifie"),
+            @ApiResponse(code = 200, message = "L'objet dossier patient modifier"),
             @ApiResponse(code = 400, message = "L'objet dossier patient n'est pas valide")
     })
     DossierPatientDto modifierDossierPatient(@RequestBody DossierPatientDto dto);
 
     @DeleteMapping(value = Api+"/supprimer")
+    @ApiOperation(value = "Supprimer un dossier patient", notes = "Cette methode permet de supprimer un dossier patient par le numero CMU")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le dossier patient a ete supprime")
+    })
     void supprimerDossierPatient(@RequestParam(required = false) String numeroCmu);
 }
