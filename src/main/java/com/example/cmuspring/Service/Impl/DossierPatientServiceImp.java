@@ -1,5 +1,6 @@
 package com.example.cmuspring.Service.Impl;
 
+import com.example.cmuspring.Dto.ConsultationDto;
 import com.example.cmuspring.Dto.DossierPatientDto;
 import com.example.cmuspring.Dto.UtilisateurDto;
 import com.example.cmuspring.Exception.EntityNotFoundException;
@@ -7,6 +8,7 @@ import com.example.cmuspring.Exception.ErrorCodes;
 import com.example.cmuspring.Exception.InvalidEntityException;
 import com.example.cmuspring.Model.DossierPatient;
 import com.example.cmuspring.Model.Utilisateur;
+import com.example.cmuspring.Repository.ConsultationRepository;
 import com.example.cmuspring.Repository.DossierConsultationRepository;
 import com.example.cmuspring.Service.DossierPatientService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,13 +29,17 @@ public class DossierPatientServiceImp implements DossierPatientService {
 
     DossierConsultationRepository dossierConsultationRepository;
     UtilisateurServiceImp utilisateurServiceImp;
+    ConsultationRepository consultationRepository;
 
 
     @Autowired
     public DossierPatientServiceImp(DossierConsultationRepository dossierConsultationRepository,
-                                    UtilisateurServiceImp utilisateurServiceImp) {
+                                    UtilisateurServiceImp utilisateurServiceImp,
+                                    ConsultationRepository consultationRepository) {
         this.dossierConsultationRepository = dossierConsultationRepository;
-        this.utilisateurServiceImp=utilisateurServiceImp;    }
+        this.utilisateurServiceImp=utilisateurServiceImp;
+        this.consultationRepository = consultationRepository;
+    }
 
     @Override
     public DossierPatientDto ajouerDossierPatient(String id ,DossierPatientDto dto) {
@@ -63,7 +69,7 @@ public class DossierPatientServiceImp implements DossierPatientService {
     @Override
     public DossierPatientDto consulterDossierPatient(String numeroCmu) {
         return DossierPatientDto.fromEntity(dossierConsultationRepository.findByNumeroCmu(numeroCmu).orElseThrow(()->
-                new EntityNotFoundException("Dossier patient inexistant avec le numero cmu: "+numeroCmu,ErrorCodes.DOSSIER_PATIENT_PAS_TROUVER)
+                new EntityNotFoundException("Dossier patient inexistant avec le numero cmu ",ErrorCodes.DOSSIER_PATIENT_PAS_TROUVER)
         ));
     }
 
@@ -79,6 +85,8 @@ public class DossierPatientServiceImp implements DossierPatientService {
 
     @Override
     public void supprimerDossierPatient(String numeroCmu) {
+        DossierPatientDto a = consulterDossierPatient(numeroCmu);
+        consultationRepository.deleteByNumeroCmu(DossierPatientDto.toEntity(a));
         dossierConsultationRepository.deleteById(numeroCmu);
     }
 }

@@ -17,5 +17,8 @@ public interface ConsultationRepository extends JpaRepository<Consultation,Integ
 //    @Query("SELECT Consultation FROM Consultation  WHERE numeroCmu = :numeroCmu")
     Optional<Consultation> findByNumeroCmu(DossierPatient numeroCmu);
 
+//    @Query("DELETE Consultation where numeroCmu = :num")
+    void deleteByNumeroCmu(DossierPatient numeroCmu);
+
 
 }
