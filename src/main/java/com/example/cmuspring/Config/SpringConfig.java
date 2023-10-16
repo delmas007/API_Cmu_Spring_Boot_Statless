@@ -4,10 +4,15 @@ import com.example.cmuspring.Service.Impl.UserDetailServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.UUID;
@@ -21,9 +26,10 @@ public class SpringConfig {
     private static final String[] MEDECIN = {Api + "/consulter", Api + "/modifier",Api + "/consultation"};
     private static final String[] EMPLOYER = {Api + "/creeDossier", Api + "/supprimer"};
     private static final String PATIENT = Api + "/voirConsultation";
-    private static final String UTILISATEUR = Api + "/utilisateur";
-    private static final String[] SWAGGER = {"/swagger-ui/**",
+    private static final String[] PUBLIC = {"/swagger-ui/**",
             "/v2/api-docs",
+            Api +"/connexion",
+            Api + "/utilisateur",
             "/swagger-resources",
             "/swagger-resources/**",
             "/configuration/ui",
@@ -33,21 +39,31 @@ public class SpringConfig {
             "/v3/api-docs/**"};
 
     @Autowired
-    public SpringConfig( UserDetailServiceImp userDetailServiceImp) {
+    public SpringConfig( UserDetailServiceImp userDetailServiceImp,PasswordEncoder passwordEncoder) {
         this.userDetailServiceImp = userDetailServiceImp;
+        this.passwordEncoder = passwordEncoder;
     }
 
     UserDetailServiceImp userDetailServiceImp;
+    PasswordEncoder passwordEncoder;
+
+    @Bean
+    AuthenticationManager authenticationManager(UserDetailsService userDetailsService){
+        DaoAuthenticationProvider authProvier = new DaoAuthenticationProvider();
+        authProvier.setPasswordEncoder(passwordEncoder);
+        authProvier.setUserDetailsService(userDetailsService);
+        return new ProviderManager(authProvier);
+    }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(auth-> auth
+                        .requestMatchers(Api +"/connexion",Api + "/utilisateur").permitAll()
                         .requestMatchers(PATIENT).hasAuthority("PATIENT")
                         .requestMatchers(EMPLOYER).hasAuthority("EMPLOYER")
                         .requestMatchers(MEDECIN).hasAuthority("MEDECIN")
-                        .requestMatchers(SWAGGER).permitAll()
-                        .requestMatchers(UTILISATEUR).permitAll()
+                        .requestMatchers(PUBLIC).permitAll()
                         .anyRequest()
                         .authenticated()
                 )
