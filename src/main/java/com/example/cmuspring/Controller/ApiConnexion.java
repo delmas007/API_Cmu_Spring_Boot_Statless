@@ -1,4 +1,4 @@
-package com.example.cmuspring.Controller.Impl;
+package com.example.cmuspring.Controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

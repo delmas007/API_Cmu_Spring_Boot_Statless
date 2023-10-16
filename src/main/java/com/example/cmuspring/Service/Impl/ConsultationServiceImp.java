@@ -37,32 +37,54 @@ public class ConsultationServiceImp implements ConsultationService {
 
     @Override
     public ConsultationDto save(String numeroCmu,ConsultationDto dto) {
+
         if(!StringUtils.hasLength(numeroCmu)){
-            throw new EntityNotFoundException("numero cmu inexistant",ErrorCodes.CONSULTATION_PAS_VALIDE);
+            throw new EntityNotFoundException("numero cmu vide",ErrorCodes.CONSULTATION_PAS_VALIDE);
         }
         DossierPatientDto dossier = dossierPatientServiceImp.consulterDossierPatient(numeroCmu);
-
+        Consultation voir = consultationRepository.findByNumeroCmu(numeroCmu).orElse(null);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
-        Consultation donnee = Consultation.builder()
-                .examenPhysique(dto.getExamenPhysique())
-                .diagnostic(dto.getDiagnostic())
-                .discussionDesSymptomes(dto.getDiscussionDesSymptomes())
-                .ordonnance(dto.getOrdonnance())
-                .idUtilisateur(principal)
-                .code(UUID.randomUUID().toString())
-                .numeroCmu(DossierPatientDto.toEntity(dossier))
-                .build();
-        if (dossier.getFeminin()){
-            if (dossier.getEnceinte()){
-                donnee.setTauxReduction(100);
+        if (voir != null){
+            voir.setExamenPhysique(dto.getExamenPhysique());
+            voir.setDiagnostic(dto.getDiagnostic());
+            voir.setDiscussionDesSymptomes(dto.getDiscussionDesSymptomes());
+            voir.setOrdonnance(dto.getOrdonnance());
+            voir.setIdUtilisateur(principal);
+            voir.setCode(UUID.randomUUID().toString());
+            voir.setNumeroCmu(DossierPatientDto.toEntity(dossier));
+            if (dossier.getFeminin()){
+                if (dossier.getEnceinte()){
+                    voir.setTauxReduction(100);
+                }else {
+                    voir.setTauxReduction(70);
+                }
             }else {
+                voir.setTauxReduction(70);
+            }
+            return ConsultationDto.fromEntity(consultationRepository.save(voir));
+        }else {
+            Consultation donnee = Consultation.builder()
+                    .examenPhysique(dto.getExamenPhysique())
+                    .diagnostic(dto.getDiagnostic())
+                    .discussionDesSymptomes(dto.getDiscussionDesSymptomes())
+                    .ordonnance(dto.getOrdonnance())
+                    .idUtilisateur(principal)
+                    .code(UUID.randomUUID().toString())
+                    .numeroCmu(DossierPatientDto.toEntity(dossier))
+                    .build();
+            if (dossier.getFeminin()) {
+                if (dossier.getEnceinte()) {
+                    donnee.setTauxReduction(100);
+                } else {
+                    donnee.setTauxReduction(70);
+                }
+            } else {
                 donnee.setTauxReduction(70);
             }
-        }else {
-            donnee.setTauxReduction(70);
+            return ConsultationDto.fromEntity(consultationRepository.save(donnee));
         }
-        return ConsultationDto.fromEntity(consultationRepository.save(donnee));
+
     }
 
     @Override
@@ -76,6 +98,7 @@ public class ConsultationServiceImp implements ConsultationService {
                 .orElseThrow(() -> new EntityNotFoundException("Aucune consultation lier au numero cmu",ErrorCodes.CONSULTATION_PAS_TROUVER)
         );
     }
+
 
 
 }
