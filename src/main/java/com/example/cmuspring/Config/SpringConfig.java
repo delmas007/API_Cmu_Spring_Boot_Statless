@@ -51,11 +51,7 @@ public class SpringConfig {
             "/webjars/**",
             "/v3/api-docs/**"};
 
-//    @Autowired
-//    public SpringConfig( UserDetailServiceImp userDetailServiceImp,PasswordEncoder passwordEncoder) {
-//        this.userDetailServiceImp = userDetailServiceImp;
-//        this.passwordEncoder = passwordEncoder;
-//    }
+
 
     UserDetailServiceImp userDetailServiceImp;
     PasswordEncoder passwordEncoder;
