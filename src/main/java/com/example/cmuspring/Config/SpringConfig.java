@@ -73,7 +73,6 @@ public class SpringConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(auth-> auth
-                        .requestMatchers(Api +"/connexion",Api + "/utilisateur").permitAll()
                         .requestMatchers(PATIENT).hasAuthority("PATIENT")
                         .requestMatchers(EMPLOYER).hasAuthority("EMPLOYER")
                         .requestMatchers(MEDECIN).hasAuthority("MEDECIN")

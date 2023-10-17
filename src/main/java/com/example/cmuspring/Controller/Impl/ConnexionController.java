@@ -33,7 +33,7 @@ public class ConnexionController implements ApiConnexion {
         Map<String, String> idToken=new HashMap<>();
         Instant instant=Instant.now();
         String scope = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(""));
+                .collect(Collectors.joining(" "));
         JwtClaimsSet jwtClaimsSet=JwtClaimsSet.builder()
                 .subject(authentication.getName())
                 .issuedAt(instant)
