@@ -11,6 +11,7 @@ import static com.example.cmuspring.Utils.Constants.Api;
 public interface ApiConnexion {
 
     @PostMapping(Api+"/connexion")
-    Map<String, String> Connexion(@RequestParam(required = false) String username,
-                                                         @RequestParam(required = false) String password);
+    ResponseEntity<Map<String, String>> Connexion(@RequestParam(required = false) String username,
+                                                         @RequestParam(required = false) String password,@RequestParam(required = false)boolean withRefreshToken,
+                                  @RequestParam(required = false)String refreshToken,@RequestParam(required = false)String grantType);
 }
