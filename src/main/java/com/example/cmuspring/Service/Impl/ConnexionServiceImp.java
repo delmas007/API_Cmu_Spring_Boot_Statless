@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
@@ -28,7 +27,8 @@ public class ConnexionServiceImp implements ConnexionService {
     UserDetailsService userDetailsService;
     AuthenticationManager authenticationManager;
     @Override
-    public ResponseEntity<Map<String, String>> Connexion(String username, String password, boolean withRefreshToken, String refreshToken, String grantType) {
+    public ResponseEntity<Map<String, String>> Connexion(String username, String password,
+                                                         boolean withRefreshToken, String refreshToken, String grantType) {
         String subject=null;
         String scope=null;
         if(grantType.equals("password")){
