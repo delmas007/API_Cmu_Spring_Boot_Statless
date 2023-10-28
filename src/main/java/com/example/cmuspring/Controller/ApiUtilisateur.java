@@ -18,7 +18,7 @@ public interface ApiUtilisateur {
             @ApiResponse(code = 200, message = "L'objet utilisateur cree"),
             @ApiResponse(code = 400, message = "L'objet utilisateur n'est pas valide")
     })
-    UtilisateurDto save(@RequestParam String role,@RequestBody UtilisateurDto dto);
+    UtilisateurDto save(@RequestParam(required = false) String role,@RequestBody UtilisateurDto dto);
 
 
 }
