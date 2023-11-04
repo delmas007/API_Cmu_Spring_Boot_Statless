@@ -81,6 +81,8 @@ public class SpringConfig {
                         .authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
+//                .cors(Customizer.withDefaults())
+//                .csrf(Customizer.withDefaults())
                 .sessionManagement(sess->sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth2->oauth2.jwt(Customizer.withDefaults()))
 //                .httpBasic(Customizer.withDefaults())

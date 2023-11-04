@@ -13,8 +13,7 @@ public class ConnexionController implements ApiConnexion {
     ConnexionServiceImp connexionServiceImp;
 
     @Override
-    public ResponseEntity<Map<String, String>> Connexion(String username, String password,boolean withRefreshToken,
-                                         String refreshToken,String grantType ) {
-        return connexionServiceImp.Connexion(username,password,withRefreshToken,refreshToken,grantType);
+    public ResponseEntity<Map<String, String>> Connexion(String username, String password) {
+        return connexionServiceImp.Connexion(username,password);
     }
 }

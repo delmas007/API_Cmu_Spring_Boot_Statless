@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 public interface ConnexionService {
-    ResponseEntity<Map<String, String>> Connexion(String username,String password, boolean withRefreshToken,
-                                                  String refreshToken, String grantType);
+//    ResponseEntity<Map<String, String>> Connexion(String username,String password, boolean withRefreshToken,
+//                                                  String refreshToken, String grantType);
+ResponseEntity<Map<String, String>> Connexion(String username,String password);
 }
