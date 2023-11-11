@@ -11,7 +11,7 @@ import static com.example.cmuspring.Utils.Constants.Api;
 
 public interface ApiConnexion {
 
-    //@CrossOrigin("http://localhost:3000")
+
     @PostMapping(Api+"/connexion")
 //    ResponseEntity<Map<String, String>> Connexion(@RequestParam(required = false) String username,
 //                                                         @RequestParam(required = false) String password,@RequestParam(required = false)boolean withRefreshToken,

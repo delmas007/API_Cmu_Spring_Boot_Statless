@@ -18,6 +18,7 @@ public interface ApiDossierPatient {
 //                                           @RequestParam(required = false) int age, @RequestParam(required = false) boolean masculin
 //                                            , @RequestParam(required = false) boolean feminin, @RequestParam(required = false) boolean enceinte);
 
+
     @PostMapping(value = Api+"/creeDossier")
     @ApiOperation(value = "Enregistrer un dossier patient", notes = "Cette methode permet d'enregistrer un dossier patient", response =
             DossierPatientDto.class)

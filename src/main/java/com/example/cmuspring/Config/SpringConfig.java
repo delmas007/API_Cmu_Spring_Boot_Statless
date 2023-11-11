@@ -33,6 +33,7 @@ import org.springframework.web.filter.CorsFilter;
 
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import static com.example.cmuspring.Utils.Constants.Api;
@@ -103,7 +104,7 @@ public class SpringConfig {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        config.setAllowedOrigins(List.of("http://localhost:3000"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "UPDATE", "DELETE"));
         config.setAllowedHeaders(Arrays.asList("Origin", "Accept", "Content-Type", "Authorization"));
         source.registerCorsConfiguration("/**", config);
