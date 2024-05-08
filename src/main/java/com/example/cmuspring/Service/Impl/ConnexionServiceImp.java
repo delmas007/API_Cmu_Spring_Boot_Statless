@@ -12,8 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
+
+import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -96,7 +97,7 @@ public ResponseEntity<Map<String, String>> Connexion(String username, String pas
     JwtClaimsSet jwtClaimsSet=JwtClaimsSet.builder()
             .subject(subject)
             .issuedAt(instant)
-            .expiresAt(instant.plus(10, ChronoUnit.MINUTES))
+            .expiresAt(instant.plus((Duration.ofMinutes(10))))
             .issuer("security-service")
             .claim("scope",scope)
             .build();
